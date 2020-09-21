@@ -16,4 +16,18 @@ class M_desa extends CI_Model {
         {
         $this->db->insert('tb_desa', $data);
         }
+
+        public function detail($id_desa)
+        {
+                $this->db->select("*");
+                $this->db->from('tb_desa');
+                $this->db->where('id_desa', '$id_desa');
+                return $this->db->get()->row();      
+        }
+
+        public function edit($data)
+        {
+                $this->db->where('id_desa', $data['id_desa']);
+                $this->db->update('tb_desa', $data);   
+        }
 }

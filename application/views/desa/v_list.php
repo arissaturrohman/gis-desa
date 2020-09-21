@@ -40,7 +40,7 @@
         <td><?= $data->latitude; ?></td>
         <td><?= $data->longitude; ?></td>
         <td>
-            <a href="" class="btn btn-success btn-sm">edit</a> | 
+            <a href="<?= base_url('desa/edit/'.$data->id_desa) ?>" class="btn btn-success btn-sm">edit</a> | 
             <a href="" class="btn btn-danger btn-sm">hapus</a>
         </td>
         </tr>

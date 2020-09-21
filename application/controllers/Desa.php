@@ -64,5 +64,49 @@ class Desa extends CI_Controller {
             redirect('desa');
         }
 
+        public function edit($id_desa)
+        {
+            $this->form_validation->set_rules('nama_desa', 'Nama Desa', 'required',array(
+                'required' => '%s Harus Diisi !!'
+            ));
+            $this->form_validation->set_rules('alamat', 'Alamat', 'required', array(
+                'required' => '%s Harus Diisi !!'
+            ));
+            $this->form_validation->set_rules('telp', 'No Telp', 'required', array(
+                'required' => '%s Harus Diisi !!'
+            ));
+            $this->form_validation->set_rules('latitude', 'Latitude', 'required', array(
+                'required' => '%s Harus Diisi !!'
+            ));
+            $this->form_validation->set_rules('longitude', 'Longitude', 'required', array(
+                'required' => '%s Harus Diisi !!'
+            ));
+            $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required', array(
+                'required' => '%s Harus Diisi !!'
+            ));
+    
+            if ($this->form_validation->run() == FALSE) {
+                $data = array(
+                    'title'   => 'Edit Data Desa se-Kecamatan Gajah',
+                    'desa'    => $this->m_desa->detail($id_desa),
+                    'isi'     => 'desa/v_edit'
+                );
+                $this->load->view('layout/v_wrapper', $data, FALSE);
+                
+            } else {
+                $data = array(
+                    'id_desa'    => $id_desa,
+                    'nama_desa'  => $this->input->post('nama_desa'),
+                    'telp'       => $this->input->post('telp'),
+                    'alamat'     => $this->input->post('alamat'),
+                    'latitude'   => $this->input->post('latitude'),
+                    'longitude'  => $this->input->post('longitude'),
+                    'deskripsi'  => $this->input->post('deskripsi'),
+                );
+                $this->m_desa->edit($data);
+                $this->session->set_flashdata('pesan', 'Data berhasil diubah');
+                redirect('desa');
+        }
+
     }
 }
